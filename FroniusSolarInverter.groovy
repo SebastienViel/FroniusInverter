@@ -18,8 +18,8 @@
  *  Updates by HardyM to give 1 min updates, reduce to 30 mins polls overnight, and also return data from Fronius SmartMeter to give Grid power and Load. 2021-07-25
  *  Dec 18,2021.  Added attribute access to pGrid and pLoad. (HardyM)
  Sourced from here
- https://github.com/jchurchward/Fronius-Solar-Inverter/blob/main/Fronius-solar-inverter-driver
- 
+https://raw.githubusercontent.com/SebastienViel/FroniusInverter/
+
  */
  
 import groovy.json.JsonSlurper
@@ -31,7 +31,12 @@ preferences {
 }
 
 metadata {
-	definition (name: "Fronius Solar Inverter 1", namespace: "TimFlinders", author: "Tim Flinders") {
+	definition (
+		name: "Fronius Solar Inverter",
+		namespace: "TimFlinders",
+		author: "Tim Flinders"
+		importUrl:"https://raw.githubusercontent.com/SebastienViel/FroniusInverter/main/FroniusSolarInverter.groovy"
+	) {
 	capability "Polling"
         capability "Power Meter"
         capability "Energy Meter"
