@@ -75,7 +75,7 @@ def parse(String description) {
         sendEvent(name: "errorCode", value: errorCode )
     } else {
         sendEvent(name: "errorCode", value: 0 )
-	if(logDebugEnable) log.debug “Received data from inverter: ${result.Body.Data.Site}"
+	if(logDebugEnable) log.debug "Received data from inverter: ${result.Body.Data.Site}"
 
         int yearValue = result.Body.Data.Site.E_Year
         int dayValue = result.Body.Data.Site.E_Day
