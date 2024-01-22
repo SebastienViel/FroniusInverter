@@ -97,10 +97,10 @@ def parse(String description) {
         sendEvent(name: "power", value: power, unit: "W" )
         sendEvent(name: "energy", value: dayValue, unit: "Wh")
         //sendEvent(name: "eYear", value: Math.round(yearValue/100)/10, unit: "kWH")
-        sendEvent(name: "eYear", value: yearValue / 100, unit: "kWH")
+        sendEvent(name: "eYear", value: yearValue / 1000, unit: "kWH")
         //sendEvent(name: "TotalEnergy", value: Math.round(totalValue/100)/10, unit: "kWH")
 
-	def value = new BigDecimal(totalValue / 100).setScale(3, BigDecimal.ROUND_HALF_UP)
+	def value = new BigDecimal(totalValue / 1000).setScale(3, BigDecimal.ROUND_HALF_UP)
 	sendEvent(name: "TotalEnergy", value: value, unit: "kWH")
 
 	    
