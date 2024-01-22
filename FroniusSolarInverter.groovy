@@ -35,7 +35,7 @@ metadata {
 	definition (
 		name: "Fronius Solar Inverter",
 		namespace: "TimFlinders",
-		author: "Tim Flinders"
+		author: "Tim Flinders",
 		importUrl:"https://raw.githubusercontent.com/SebastienViel/FroniusInverter/main/FroniusSolarInverter.groovy"
 	) {
 	capability "Polling"
