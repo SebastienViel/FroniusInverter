@@ -135,6 +135,7 @@ def callInvertor() {
         	'headers': [ HOST: "$destIp:$destPort" ]
 		))
 
+//This is the call to get data	    
     def hubAction = new hubitat.device.HubAction(
    	 		'method': 'GET',
     		'path': "/solar_api/v1/GetPowerFlowRealtimeData.fcgi",
