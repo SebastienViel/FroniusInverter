@@ -23,6 +23,7 @@ https://raw.githubusercontent.com/SebastienViel/FroniusInverter/
  */
  
 import groovy.json.JsonSlurper
+import java.math.BigDecimal
  
 preferences {
 	input("inverterNumber", "number", title: "Inverter Number", description: "The Inverter Number", required: true, displayDuringSetup: true)
@@ -92,9 +93,15 @@ def parse(String description) {
         //}
         sendEvent(name: "power", value: power, unit: "W" )
         sendEvent(name: "energy", value: dayValue, unit: "Wh")
-        sendEvent(name: "eYear", value: Math.round(yearValue/100)/10, unit: "kWH")
+        //sendEvent(name: "eYear", value: Math.round(yearValue/100)/10, unit: "kWH")
+        sendEvent(name: "eYear", value: yearValue / 100, unit: "kWH")
         //sendEvent(name: "TotalEnergy", value: Math.round(totalValue/100)/10, unit: "kWH")
-	sendEvent(name: "TotalEnergy", value: totalValue / 100, unit: "kWH")
+
+	def value = new BigDecimal(totalValue / 100).setScale(10, BigDecimal.ROUND_HALF_UP)
+	sendEvent(name: "TotalEnergy", value: value, unit: "kWH")
+
+	    
+	//sendEvent(name: "TotalEnergy", value: totalValue / 100, unit: "kWH")
         //sendEvent(name: "pGrid", value: pGrid, unit: "W")
         //sendEvent(name: "pLoad", value: pLoad, unit: "W")
         //Keep track of when the last update came in
