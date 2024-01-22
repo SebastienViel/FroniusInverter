@@ -50,6 +50,7 @@ metadata {
         attribute "errorCode", "number"
         attribute "pGrid", "number"
         attribute "pLoad", "number"
+	attribute "TotalEnergy", "number"
 	}
 }
 
