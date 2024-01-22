@@ -51,7 +51,7 @@ metadata {
 }
 
 def initialize() {
-	log.info "Fronius Inverter ${textVersion()} ${textCopyright()}"
+	if(logDebugEnable) log.info "Fronius Inverter ${textVersion()} ${textCopyright()}"
     sendEvent(name: "power", value: 0	)
     sendEvent(name: "YearValue", value: 0 )
     sendEvent(name: "energy", value: 0 )
@@ -102,6 +102,9 @@ def parse(String description) {
             sendEvent(name: "Status", value: "Online")
         }
         state.parseCallCounter=0
+
+	// Log the received data for debugging
+        if(logDebugEnable) log.debug "Received data from inverter: ${result}"
     }
 }
 
@@ -143,12 +146,10 @@ def callInvertor() {
         	'headers': [ HOST: "$destIp:$destPort" ]
 		) 
     hubAction
-
-	if(logDebugEnable) log.debug hubAction
 	    
     }
     catch (Exception e) {
-        log.debug "Hit Exception $e on $hubAction"
+        if(logDebugEnable) log.debug "Hit Exception $e on $hubAction"
     }
 }
 
