@@ -17,6 +17,7 @@
  *  EDITED by jchurch and Markus to include kWh conversation for energy stat - 02/21
  *  Updates by HardyM to give 1 min updates, reduce to 30 mins polls overnight, and also return data from Fronius SmartMeter to give Grid power and Load. 2021-07-25
  *  Dec 18,2021.  Added attribute access to pGrid and pLoad. (HardyM)
+ *  Jan 22,2024 - Updated to work with latest API (Sébastien Viel & Stephen Townsend)
  Sourced from here
 https://raw.githubusercontent.com/SebastienViel/FroniusInverter/
 
@@ -51,6 +52,8 @@ metadata {
         attribute "pGrid", "number"
         attribute "pLoad", "number"
 	attribute "TotalEnergy", "number"
+	attribute "YearValue", "number"
+	attribute "DayValue", "number"
 	}
 }
 
@@ -84,29 +87,32 @@ def parse(String description) {
         int yearValue = result.Body.Data.Site.E_Year
         int dayValue = result.Body.Data.Site.E_Day
         int totalValue = result.Body.Data.Site.E_Total
-        //int pGrid = result.Body.Data.Site.P_Grid
-        //int pLoad = result.Body.Data.Site.P_Load
-        //pLoad = -pLoad
-        //def pPV = result.Body.Data.Site.P_PV
-        //int power
-        //if (pPV == null) {
-        //    power = 0
-        //} else {
-        //    power = pPV
-        //}
+        int pGrid = result.Body.Data.Site.P_Grid
+	if (pGrid == null) {
+		pGrid = 0
+	}
+        int pLoad = result.Body.Data.Site.P_Load
+        if (pLoad == null) {
+		pLoad = 0
+	} else {
+	    pLoad = -pLoad
+	}
+        def pPV = result.Body.Data.Site.P_PV
+        int power
+        if (pPV == null) {
+            power = 0
+        } else {
+            power = pPV
+        }
         sendEvent(name: "power", value: power, unit: "W" )
         sendEvent(name: "energy", value: dayValue, unit: "Wh")
-        //sendEvent(name: "eYear", value: Math.round(yearValue/100)/10, unit: "kWH")
         sendEvent(name: "eYear", value: yearValue / 1000, unit: "kWH")
-        //sendEvent(name: "TotalEnergy", value: Math.round(totalValue/100)/10, unit: "kWH")
-
-	def value = new BigDecimal(totalValue / 1000).setScale(3, BigDecimal.ROUND_HALF_UP)
+        def value = new BigDecimal(totalValue / 1000).setScale(3, BigDecimal.ROUND_HALF_UP)
 	sendEvent(name: "TotalEnergy", value: value, unit: "kWH")
 
 	    
-	//sendEvent(name: "TotalEnergy", value: totalValue / 100, unit: "kWH")
-        //sendEvent(name: "pGrid", value: pGrid, unit: "W")
-        //sendEvent(name: "pLoad", value: pLoad, unit: "W")
+	sendEvent(name: "pGrid", value: pGrid, unit: "W")
+        sendEvent(name: "pLoad", value: pLoad, unit: "W")
         //Keep track of when the last update came in
         if (state.parseCallCounter>0)
         {
