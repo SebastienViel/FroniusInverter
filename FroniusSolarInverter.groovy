@@ -26,8 +26,9 @@ import groovy.json.JsonSlurper
  
 preferences {
 	input("inverterNumber", "number", title: "Inverter Number", description: "The Inverter Number", required: true, displayDuringSetup: true)
-    input("destIp", "text", title: "IP", description: "The device IP", required: true, displayDuringSetup: true)
-    input("destPort", "number", title: "Port", description: "The port you wish to connect", required: true, displayDuringSetup: true)
+    	input("destIp", "text", title: "IP", description: "The device IP", required: true, displayDuringSetup: true)
+    	input("destPort", "number", title: "Port", description: "The port you wish to connect", required: true, displayDuringSetup: true)
+	input("logDebugEnable", "bool", title: "Enable Debug logging", required: true, defaultValue: false)
 }
 
 metadata {
@@ -142,6 +143,9 @@ def callInvertor() {
         	'headers': [ HOST: "$destIp:$destPort" ]
 		) 
     hubAction
+
+	if(logDebugEnable) log.debug hubAction
+	    
     }
     catch (Exception e) {
         log.debug "Hit Exception $e on $hubAction"
