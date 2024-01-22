@@ -87,23 +87,18 @@ def parse(String description) {
         int yearValue = result.Body.Data.Site.E_Year
         int dayValue = result.Body.Data.Site.E_Day
         int totalValue = result.Body.Data.Site.E_Total
-        int pGrid = result.Body.Data.Site.P_Grid
-	if (pGrid == null) {
-		pGrid = 0
-	}
-        int pLoad = result.Body.Data.Site.P_Load
-        if (pLoad == null) {
-		pLoad = 0
-	} else {
+	def pGridValue = result.Body.Data.Site.P_Grid
+	int pGrid = pGridValue != null ? pGridValue.toInteger() : 0
+        def pLoadValue = result.Body.Data.Site.P_Load
+        int pLoad = pLoadValue != null ? pLoadValue.toInteger() : 0
 	    pLoad = -pLoad
-	}
         def pPV = result.Body.Data.Site.P_PV
-        int power
-        if (pPV == null) {
-            power = 0
-        } else {
-            power = pPV
-        }
+        int power = pPV != null ? pPV.toInteger() : 0
+//        if (pPV == null) {
+//            power = 0
+//        } else {
+//            power = pPV
+//        }
         sendEvent(name: "power", value: power, unit: "W" )
         sendEvent(name: "energy", value: dayValue, unit: "Wh")
         sendEvent(name: "eYear", value: yearValue / 1000, unit: "kWH")
