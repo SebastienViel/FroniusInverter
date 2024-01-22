@@ -40,11 +40,13 @@ metadata {
 		importUrl:"https://raw.githubusercontent.com/SebastienViel/FroniusInverter/main/FroniusSolarInverter.groovy"
 	) {
 	capability "Polling"
-        capability "Power Meter"
-        capability "Energy Meter"
+        capability "PowerMeter"
+        capability "EnergyMeter"
         capability "Actuator"
         capability "Refresh"
         capability "Sensor"
+        capability "VoltageMeasurement"
+		
         attribute "errorCode", "number"
         attribute "pGrid", "number"
         attribute "pLoad", "number"
