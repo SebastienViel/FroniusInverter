@@ -80,22 +80,22 @@ def parse(String description) {
         int yearValue = result.Body.Data.Site.E_Year
         int dayValue = result.Body.Data.Site.E_Day
         int totalValue = result.Body.Data.Site.E_Total
-        int pGrid = result.Body.Data.Site.P_Grid
-        int pLoad = result.Body.Data.Site.P_Load
-        pLoad = -pLoad
-        def pPV = result.Body.Data.Site.P_PV
-        int power
-        if (pPV == null) {
-            power = 0
-        } else {
-            power = pPV
-        }
+        //int pGrid = result.Body.Data.Site.P_Grid
+        //int pLoad = result.Body.Data.Site.P_Load
+        //pLoad = -pLoad
+        //def pPV = result.Body.Data.Site.P_PV
+        //int power
+        //if (pPV == null) {
+        //    power = 0
+        //} else {
+        //    power = pPV
+        //}
         sendEvent(name: "power", value: power, unit: "W" )
         sendEvent(name: "energy", value: dayValue, unit: "Wh")
         sendEvent(name: "eYear", value: Math.round(yearValue/100)/10, unit: "kWH")
         sendEvent(name: "TotalEnergy", value: Math.round(totalValue/100)/10, unit: "kWH")
-        sendEvent(name: "pGrid", value: pGrid, unit: "W")
-        sendEvent(name: "pLoad", value: pLoad, unit: "W")
+        //sendEvent(name: "pGrid", value: pGrid, unit: "W")
+        //sendEvent(name: "pLoad", value: pLoad, unit: "W")
         //Keep track of when the last update came in
         if (state.parseCallCounter>0)
         {
