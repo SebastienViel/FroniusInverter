@@ -29,7 +29,7 @@ import java.math.BigDecimal
  
 preferences {
 	input("inverterNumber", "number", title: "Inverter Number", description: "The Inverter Number", required: true, displayDuringSetup: true)
-    	input("destIp", "text", title: "IP", description: "The device IP", required: true, displayDuringSetup: true)
+	input("destIp", "text", title: "IP", description: "The device IP", required: true, displayDuringSetup: true)
 	input("destPort", "number", title: "Port", description: "The port you wish to connect", required: true, displayDuringSetup: true)
 	input("logDebugEnable", "bool", title: "Enable Debug logging", required: true, defaultValue: false)
 }
