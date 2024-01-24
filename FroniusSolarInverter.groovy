@@ -18,9 +18,10 @@
  *  Updates by HardyM to give 1 min updates, reduce to 30 mins polls overnight, and also return data from Fronius SmartMeter to give Grid power and Load. 2021-07-25
  *  Dec 18,2021.  Added attribute access to pGrid and pLoad. (HardyM)
  *  Jan 22,2024 - Updated to work with latest API (Sébastien Viel & Stephen Townsend)
- Sourced from here
-https://raw.githubusercontent.com/SebastienViel/FroniusInverter/
-
+ *
+ *  Sourced from here
+ *  https://github.com/SebastienViel/FroniusInverter/tree/main
+ *
  */
  
 import groovy.json.JsonSlurper
