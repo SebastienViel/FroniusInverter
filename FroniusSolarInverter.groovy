@@ -55,7 +55,7 @@ metadata {
 	attribute "TotalEnergy", "number"
 	attribute "YearValue", "number"
 	attribute "DayValue", "number"
-	attribute "Status", "String"
+	attribute 'healthStatus', 'enum', ['unknown', 'offline', 'online']
 	}
 }
 
@@ -106,7 +106,7 @@ def parse(String description) {
 		//Keep track of when the last update came in
 		if (state.parseCallCounter>0) {
 			updated()    // reset the poll timer back to 1 min if we got an answer
-        		sendEvent(name: "Status", value: "Online")
+        		sendEvent(name: "healthStatus", value: "online")
 		}
 		state.parseCallCounter=0
 
@@ -124,7 +124,7 @@ def poll() {
 	}
 	if (state.parseCallCounter==3) {
 		// Not getting Fronius's replies so could be sleeping.  Set the timer with 30 min interval
-		sendEvent(name: "Status", value: "Not Responding")
+		sendEvent(name: "healthStatus", value: "offline")
 		unschedule(refresh)
 		schedule('0 */30 * ? * *', refresh)
 	}
