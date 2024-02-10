@@ -55,6 +55,7 @@ metadata {
 	attribute "TotalEnergy", "number"
 	attribute "YearValue", "number"
 	attribute "DayValue", "number"
+	attribute "Status", "String"
 	}
 }
 
