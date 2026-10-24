@@ -142,9 +142,9 @@ def poll() {
 		unschedule("refresh")
 		schedule('0 */5 * ? * *', "refresh")
 	} else if (n == 15) {
-		// Still nothing after ~1 hour of 5 minute polls. Back off to 30 minutes.
+		// Still nothing after ~1 hour of 5 minute polls. Back off to 15 minutes.
 		unschedule("refresh")
-		schedule('0 */30 * ? * *', "refresh")
+		schedule('0 */15 * ? * *', "refresh")
 	}
 	callInvertor()
 }
